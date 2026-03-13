@@ -19,19 +19,20 @@ Claude Code only looks one level deep for `SKILL.md` files, so each skill folder
 
 ```bash
 # Clone to a convenient location
-git clone https://github.com/SeanPedersen/agent-skills ~/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills
+cd agent-skills
 
 # Symlink individual skills (user-level)
 mkdir -p ~/.claude/skills
-ln -s ~/agent-skills/browser-tools ~/.claude/skills/browser-tools
-ln -s ~/agent-skills/optimize-design ~/.claude/skills/optimize-design
-ln -s ~/agent-skills/optimize-website ~/.claude/skills/optimize-website
-ln -s ~/agent-skills/security-audit ~/.claude/skills/security-audit
+ln -s "$PWD/browser-tools" ~/.claude/skills/browser-tools
+ln -s "$PWD/optimize-design" ~/.claude/skills/optimize-design
+ln -s "$PWD/optimize-website" ~/.claude/skills/optimize-website
+ln -s "$PWD/security-audit" ~/.claude/skills/security-audit
 
 # Or project-level
 mkdir -p .claude/skills
-ln -s ~/agent-skills/browser-tools .claude/skills/browser-tools
-ln -s ~/agent-skills/optimize-design .claude/skills/optimize-design
-ln -s ~/agent-skills/optimize-website .claude/skills/optimize-website
-ln -s ~/agent-skills/security-audit .claude/skills/security-audit
+ln -s "$PWD/browser-tools" .claude/skills/browser-tools
+ln -s "$PWD/optimize-design" .claude/skills/optimize-design
+ln -s "$PWD/optimize-website" .claude/skills/optimize-website
+ln -s "$PWD/security-audit" .claude/skills/security-audit
 ```
