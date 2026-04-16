@@ -6,10 +6,15 @@
 # ///
 
 import argparse
+import logging
 import sys
 
 import niquests
 import whois
+
+# Suppress noisy connection errors from HTTP probes
+logging.getLogger("niquests").setLevel(logging.CRITICAL)
+logging.getLogger("urllib3").setLevel(logging.CRITICAL)
 
 
 DEFAULT_TLDS = ["com", "net", "org", "io", "dev", "app"]
@@ -40,13 +45,15 @@ def check_whois(domain: str) -> dict:
         }
     except Exception as e:
         err_str = str(e).lower()
-        if "no match" in err_str or "not found" in err_str or "no entries" in err_str:
+        if any(kw in err_str for kw in ("no match", "not found", "no entries", "status: free", "free\n")):
             return {"available": True, "method": "whois"}
         return {"available": None, "method": "whois", "error": str(e)}
 
 
 def check_http(domain: str) -> bool:
     """Quick HTTP probe. Returns True if domain responds (likely taken)."""
+    import warnings
+    warnings.filterwarnings("ignore")
     for scheme in ["https", "http"]:
         try:
             resp = niquests.head(
