@@ -12,6 +12,9 @@ Fork of [pi-skills](https://github.com/badlogic/pi-skills) with modifications.
 | [browser-tools](browser-tools/SKILL.md) | Interactive browser automation via Chrome DevTools Protocol |
 | [ddgs-search](ddgs-search/SKILL.md) | Web search and content extraction via DuckDuckGo (free, no API key) |
 | [free-domain-search](free-domain-search/SKILL.md) | Check domain name availability via HTTP + WHOIS |
+| [optimize-design](optimize-design/SKILL.md) | Tools and techniques for creating and optimizing web app UI/UX |
+| [optimize-website](optimize-website/SKILL.md) | Audit and optimize website performance targeting Core Web Vitals |
+| [security-audit](security-audit/SKILL.md) | Audit web apps for OWASP Top 10 security vulnerabilities |
 | [youtube-transcript](youtube-transcript/SKILL.md) | Fetch YouTube video transcripts |
 
 ## Installation
@@ -22,7 +25,7 @@ Claude Code only looks one level deep for `SKILL.md` files, so each skill folder
 
 ```bash
 # Clone to a convenient location
-git clone https://github.com/joshuaalsen/agent-skills ~/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills ~/agent-skills
 
 # Symlink individual skills (user-level)
 mkdir -p ~/.claude/skills
@@ -30,6 +33,9 @@ ln -s ~/agent-skills/blog-post ~/.claude/skills/blog-post
 ln -s ~/agent-skills/browser-tools ~/.claude/skills/browser-tools
 ln -s ~/agent-skills/ddgs-search ~/.claude/skills/ddgs-search
 ln -s ~/agent-skills/free-domain-search ~/.claude/skills/free-domain-search
+ln -s ~/agent-skills/optimize-design ~/.claude/skills/optimize-design
+ln -s ~/agent-skills/optimize-website ~/.claude/skills/optimize-website
+ln -s ~/agent-skills/security-audit ~/.claude/skills/security-audit
 ln -s ~/agent-skills/youtube-transcript ~/.claude/skills/youtube-transcript
 
 # Or project-level
@@ -38,13 +44,16 @@ ln -s ~/agent-skills/blog-post .claude/skills/blog-post
 ln -s ~/agent-skills/browser-tools .claude/skills/browser-tools
 ln -s ~/agent-skills/ddgs-search .claude/skills/ddgs-search
 ln -s ~/agent-skills/free-domain-search .claude/skills/free-domain-search
+ln -s ~/agent-skills/optimize-design .claude/skills/optimize-design
+ln -s ~/agent-skills/optimize-website .claude/skills/optimize-website
+ln -s ~/agent-skills/security-audit .claude/skills/security-audit
 ln -s ~/agent-skills/youtube-transcript .claude/skills/youtube-transcript
 ```
 
 ### Codex CLI
 
 ```bash
-git clone https://github.com/joshuaalsen/agent-skills ~/.codex/skills/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills ~/.codex/skills/agent-skills
 ```
 
 ### Amp
@@ -52,21 +61,18 @@ git clone https://github.com/joshuaalsen/agent-skills ~/.codex/skills/agent-skil
 Amp finds skills recursively in toolboxes:
 
 ```bash
-git clone https://github.com/joshuaalsen/agent-skills ~/.config/amp/tools/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills ~/.config/amp/tools/agent-skills
 ```
 
 ### Droid (Factory)
 
 ```bash
 # User-level
-git clone https://github.com/joshuaalsen/agent-skills ~/.factory/skills/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills ~/.factory/skills/agent-skills
 
 # Or project-level
-git clone https://github.com/joshuaalsen/agent-skills .factory/skills/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills .factory/skills/agent-skills
 ```
-
-
-
 
 ## Skill Format
 
