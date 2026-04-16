@@ -24,30 +24,20 @@ Fork of [pi-skills](https://github.com/badlogic/pi-skills) with modifications.
 Claude Code only looks one level deep for `SKILL.md` files, so each skill folder must be directly under the skills directory. Clone the repo somewhere, then symlink individual skills:
 
 ```bash
-# Clone to a convenient location
-git clone https://github.com/SeanPedersen/agent-skills ~/agent-skills
+git clone https://github.com/SeanPedersen/agent-skills
+cd agent-skills
 
-# Symlink individual skills (user-level)
+# Symlink all skills (user-level)
 mkdir -p ~/.claude/skills
-ln -s ~/agent-skills/blog-post ~/.claude/skills/blog-post
-ln -s ~/agent-skills/browser-tools ~/.claude/skills/browser-tools
-ln -s ~/agent-skills/ddgs-search ~/.claude/skills/ddgs-search
-ln -s ~/agent-skills/free-domain-search ~/.claude/skills/free-domain-search
-ln -s ~/agent-skills/optimize-design ~/.claude/skills/optimize-design
-ln -s ~/agent-skills/optimize-website ~/.claude/skills/optimize-website
-ln -s ~/agent-skills/security-audit ~/.claude/skills/security-audit
-ln -s ~/agent-skills/youtube-transcript ~/.claude/skills/youtube-transcript
+for skill in "$(pwd)"/*/; do
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.claude/skills/$(basename "$skill")
+done
 
 # Or project-level
 mkdir -p .claude/skills
-ln -s ~/agent-skills/blog-post .claude/skills/blog-post
-ln -s ~/agent-skills/browser-tools .claude/skills/browser-tools
-ln -s ~/agent-skills/ddgs-search .claude/skills/ddgs-search
-ln -s ~/agent-skills/free-domain-search .claude/skills/free-domain-search
-ln -s ~/agent-skills/optimize-design .claude/skills/optimize-design
-ln -s ~/agent-skills/optimize-website .claude/skills/optimize-website
-ln -s ~/agent-skills/security-audit .claude/skills/security-audit
-ln -s ~/agent-skills/youtube-transcript .claude/skills/youtube-transcript
+for skill in "$(pwd)"/*/; do
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" .claude/skills/$(basename "$skill")
+done
 ```
 
 ### Codex CLI
