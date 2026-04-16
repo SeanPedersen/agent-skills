@@ -36,10 +36,17 @@ Write the blog post as a markdown file. Follow these rules strictly:
   - "state of the art" instead of "state-of-the-art"
   - "long term" instead of "long-term"
   - Use "to" instead of hyphens in ranges: "5 to 10" not "5-10"
-  - Use em dashes (—) for parenthetical statements if needed
-- Write in a clear, engaging style
+- **Never use em dashes (—) or en dashes (–).** Use commas, periods, or parentheses instead.
+- **Write like a human, not an AI.** Specifically:
+  - Use simple, everyday words. Write "use" not "utilize", "help" not "facilitate", "start" not "embark", "show" not "showcase", "change" not "revolutionize".
+  - Ban these AI slop words/phrases entirely: "delve", "tapestry", "landscape", "paradigm", "leverage", "robust", "comprehensive", "cutting-edge", "groundbreaking", "game-changing", "pivotal", "seamlessly", "furthermore", "moreover", "it's worth noting", "in today's world", "at its core", "in the realm of", "the power of".
+  - Keep sentences short. If a sentence has more than 25 words, split it.
+  - Write in active voice. Not "the results were analyzed" but "we analyzed the results".
+  - Be direct. State the point first, then support it. No flowery introductions.
+  - Vary sentence length and structure. Monotone rhythm = AI smell.
+  - Write at a 8th grade reading level. If a simpler word exists, use it.
 - Use proper markdown headings, paragraphs, and formatting
-- Include a compelling introduction and conclusion
+- No generic "compelling" introductions or "in conclusion" wrapups. Start with the most interesting fact or claim. End when you're done.
 
 ### 3. Add a References Section
 
@@ -54,8 +61,8 @@ Example:
 ```markdown
 ## References
 
-1. [Understanding Modern Web Frameworks](https://example.com/web-frameworks) — Overview of current framework landscape
-2. [Performance Benchmarks 2025](https://example.com/benchmarks) — Comparative analysis of framework performance
+1. [Understanding Modern Web Frameworks](https://example.com/web-frameworks)
+2. [Performance Benchmarks 2025](https://example.com/benchmarks)
 ```
 
 ### 4. Validate All Reference Links
