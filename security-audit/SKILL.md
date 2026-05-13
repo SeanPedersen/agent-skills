@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Audit web applications for security vulnerabilities. Covers OWASP Top 10 with actionable checklists for injection, auth, XSS, CSRF, secrets, headers, dependencies, and more.
+description: Audit web applications for security vulnerabilities
 ---
 
 # Web Application Security Audit

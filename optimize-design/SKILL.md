@@ -1,6 +1,6 @@
 ---
 name: optimize-design
-description: Tools and techniques for creating and optimizing web app user interfaces (UI) and user experience (UX).
+description: Optimize UI and UX design
 ---
 
 # Optimize Design

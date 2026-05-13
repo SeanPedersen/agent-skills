@@ -1,6 +1,6 @@
 ---
 name: youtube-transcript
-description: Fetch transcripts from YouTube videos for summarization and analysis. Raw timestamped output, or summary-ready text with an ad-removal prompt.
+description: Fetch transcripts from YouTube videos (urls)
 ---
 
 # YouTube Transcript

@@ -1,11 +1,11 @@
 ---
 name: blog-post
-description: Create a well-researched blog post about a requested topic. Researches the area, writes without hyphens, and adds a validated References section with external links.
+description: Create a blog post
 ---
 
 # Blog Post Writer
 
-Create a well-researched blog post on a given topic.
+Create a well-researched blog post on a given topic. Researches the area, writes without hyphens, and adds a validated References section with external links.
 
 ## Process
 

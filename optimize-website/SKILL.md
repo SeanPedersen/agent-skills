@@ -1,6 +1,6 @@
 ---
 name: optimize-website
-description: Audit and optimize website performance targeting Core Web Vitals (LCP, CLS, INP). Use when the user wants to improve page speed, reduce bundle size, or fix performance issues.
+description: Audit and optimize website performance / speed
 ---
 
 # Optimize Website Performance

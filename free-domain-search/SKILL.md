@@ -1,6 +1,6 @@
 ---
 name: free-domain-search
-description: Check domain name availability using HTTP probing and WHOIS lookup. Use when brainstorming project names or checking if domains are free.
+description: Check domain name availability
 ---
 
 # Free Domain Search

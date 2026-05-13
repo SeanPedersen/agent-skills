@@ -1,6 +1,6 @@
 ---
 name: ddgs-search
-description: Web search and content extraction via DuckDuckGo. Free, no API key required. Use for searching documentation, facts, or any web content.
+description: Web search
 ---
 
 # DuckDuckGo Search
