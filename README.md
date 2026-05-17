@@ -1,6 +1,6 @@
 # agent-skills
 
-A collection of agent skills compatible with Claude Code, Codex CLI, Amp, and Droid.
+A collection of agent skills compatible with Claude Code and Codex CLI.
 
 Fork of [pi-skills](https://github.com/badlogic/pi-skills) with modifications.
 
@@ -42,26 +42,16 @@ done
 
 ### Codex CLI
 
-```bash
-git clone https://github.com/SeanPedersen/agent-skills ~/.codex/skills/agent-skills
-```
-
-### Amp
-
-Amp finds skills recursively in toolboxes:
+Codex also expects skill folders directly under the skills directory. Symlink each skill:
 
 ```bash
-git clone https://github.com/SeanPedersen/agent-skills ~/.config/amp/tools/agent-skills
-```
+git clone https://github.com/SeanPedersen/agent-skills
+cd agent-skills
 
-### Droid (Factory)
-
-```bash
-# User-level
-git clone https://github.com/SeanPedersen/agent-skills ~/.factory/skills/agent-skills
-
-# Or project-level
-git clone https://github.com/SeanPedersen/agent-skills .factory/skills/agent-skills
+mkdir -p ~/.codex/skills
+for skill in "$(pwd)"/*/; do
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.codex/skills/$(basename "$skill")
+done
 ```
 
 ## Skill Format
