@@ -10,25 +10,49 @@ import sys
 
 from ddgs import DDGS
 
+DEFAULT_BACKEND = "brave"
+DEFAULT_NUM_RESULTS = 5
+DEFAULT_REGION = "wt-wt"
+DEFAULT_TIMEOUT_SECONDS = 5
+MAX_RESULTS = 20
+SEARCH_BACKENDS = ("auto", "brave", "google", "bing", "yahoo")
+
+
+def positive_int(value):
+    parsed_value = int(value)
+    if parsed_value < 1:
+        raise argparse.ArgumentTypeError("must be at least 1")
+    return parsed_value
+
+
+def positive_float(value):
+    parsed_value = float(value)
+    if parsed_value <= 0:
+        raise argparse.ArgumentTypeError("must be greater than 0")
+    return parsed_value
+
 
 def main():
     parser = argparse.ArgumentParser(description="Search the web via DuckDuckGo")
     parser.add_argument("query", nargs="+", help="Search query")
-    parser.add_argument("-n", "--num", type=int, default=5, help="Number of results (default: 5, max: 20)")
-    parser.add_argument("--region", default="wt-wt", help="Region code (default: wt-wt for no region)")
+    parser.add_argument("-n", "--num", type=positive_int, default=DEFAULT_NUM_RESULTS, help="Number of results (default: 5, max: 20)")
+    parser.add_argument("--region", default=DEFAULT_REGION, help="Region code (default: wt-wt for no region)")
     parser.add_argument("--timelimit", choices=["d", "w", "m", "y"], help="Time filter: d=day, w=week, m=month, y=year")
+    parser.add_argument("--backend", choices=SEARCH_BACKENDS, default=DEFAULT_BACKEND, help="Search backend (default: brave)")
+    parser.add_argument("--timeout", type=positive_float, default=DEFAULT_TIMEOUT_SECONDS, help="Request timeout in seconds (default: 5)")
     args = parser.parse_args()
 
     query = " ".join(args.query)
-    num = min(args.num, 20)
+    num = min(args.num, MAX_RESULTS)
 
     try:
-        with DDGS() as ddgs:
+        with DDGS(timeout=args.timeout) as ddgs:
             results = list(ddgs.text(
                 query,
                 region=args.region,
                 timelimit=args.timelimit,
                 max_results=num,
+                backend=args.backend,
             ))
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)

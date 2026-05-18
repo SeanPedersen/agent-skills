@@ -9,6 +9,8 @@ import sys
 
 from ddgs import DDGS
 
+DEFAULT_TIMEOUT_SECONDS = 5
+
 
 def main():
     if len(sys.argv) < 2:
@@ -18,7 +20,7 @@ def main():
 
     url = sys.argv[1]
     try:
-        with DDGS() as d:
+        with DDGS(timeout=DEFAULT_TIMEOUT_SECONDS) as d:
             result = d.extract(url, fmt="text_markdown")
             print(result.get("content", "(Could not extract content)"))
     except Exception as e:
