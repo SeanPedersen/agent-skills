@@ -48,7 +48,19 @@ Write the blog post as a markdown file. Follow these rules strictly:
 - Use proper markdown headings, paragraphs, and formatting
 - No generic "compelling" introductions or "in conclusion" wrapups. Start with the most interesting fact or claim. End when you're done.
 
-### 3. Add a References Section
+### 3. Add Wikipedia Links for Technical Terms
+
+Identify 5 to 10 key technical terms in the blog post (acronyms, named technologies, concepts, algorithms, etc.). Resolve their Wikipedia URLs:
+
+```bash
+uv run {baseDir}/wikipedia_links.py '["term1", "term2", "term3"]'
+```
+
+The script returns a JSON object mapping each term to its Wikipedia URL (or `null` if not found). For each term with a resolved URL, add an inline link on its **first occurrence** in the post body. Do not link the same term twice. Skip terms where the URL is `null`.
+
+Example: replace `REST API` with `[REST API](https://en.wikipedia.org/wiki/REST)`.
+
+### 4. Add a References Section
 
 At the end of the post, add a `## References` section with numbered external links. Each reference must:
 
@@ -65,7 +77,7 @@ Example:
 2. [Performance Benchmarks 2025](https://example.com/benchmarks)
 ```
 
-### 4. Validate All Reference Links
+### 5. Validate All Reference Links
 
 After writing, validate every link in the References section:
 
