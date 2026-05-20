@@ -13,16 +13,16 @@ Follow these steps in order:
 
 ### 1. Research the Topic
 
-Use the ddgs-search skill to research the topic thoroughly:
+Use the web-search skill to research the topic thoroughly:
 
 ```bash
-uv run {baseDir}/../ddgs-search/search.py "<topic>" -n 10
+uv run {baseDir}/../web-search/search.py "<topic>" -n 10
 ```
 
 Read the top results to gather facts, perspectives, and sources:
 
 ```bash
-uv run {baseDir}/../ddgs-search/content.py "<url>"
+uv run {baseDir}/../web-search/content.py "<url>"
 ```
 
 Gather at least 3 high quality external sources to reference.
@@ -99,4 +99,4 @@ Save the blog post as a markdown file in the current working directory. Use a sl
 
 ## Dependencies
 
-This skill requires the `ddgs-search` skill to be available at `{baseDir}/../ddgs-search/`.
+This skill requires the `web-search` skill to be available at `{baseDir}/../web-search/`.

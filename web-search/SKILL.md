@@ -1,5 +1,5 @@
 ---
-name: ddgs-search
+name: web-search
 description: Web search
 ---
 
