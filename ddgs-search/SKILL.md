@@ -22,7 +22,7 @@ uv run {baseDir}/search.py "query" --timelimit d           # Results from last d
 uv run {baseDir}/search.py "query" --timelimit w           # Results from last week
 uv run {baseDir}/search.py "query" --region de-de          # Results from Germany
 uv run {baseDir}/search.py "query" -n 3 --timelimit m      # Combined options
-uv run {baseDir}/search.py "query" --backend google        # Override search backend
+uv run {baseDir}/search.py "query" --backend brave         # Force a single specific backend
 uv run {baseDir}/search.py "query" --timeout 3             # Fail slow providers faster
 ```
 
@@ -30,7 +30,7 @@ uv run {baseDir}/search.py "query" --timeout 3             # Fail slow providers
 
 - `-n <num>` - Number of results (default: 5, max: 20)
 - `--region <code>` - Region code (default: wt-wt for global). Examples: us-en, de-de, fr-fr
-- `--backend <name>` - Search backend (default: brave). Options: auto, brave, google, bing, yahoo
+- `--backend <name>` - Search backend (default: auto). Options: auto, brave, google, bing, yahoo. `auto` queries all engines simultaneously with priority ordering — the most robust choice.
 - `--timeout <seconds>` - Request timeout (default: 5)
 - `--timelimit <period>` - Filter by time:
   - `d` - Past day

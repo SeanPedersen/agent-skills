@@ -10,7 +10,7 @@ import sys
 
 from ddgs import DDGS
 
-DEFAULT_BACKEND = "brave"
+DEFAULT_BACKEND = "auto"
 DEFAULT_NUM_RESULTS = 5
 DEFAULT_REGION = "wt-wt"
 DEFAULT_TIMEOUT_SECONDS = 5
@@ -38,7 +38,7 @@ def main():
     parser.add_argument("-n", "--num", type=positive_int, default=DEFAULT_NUM_RESULTS, help="Number of results (default: 5, max: 20)")
     parser.add_argument("--region", default=DEFAULT_REGION, help="Region code (default: wt-wt for no region)")
     parser.add_argument("--timelimit", choices=["d", "w", "m", "y"], help="Time filter: d=day, w=week, m=month, y=year")
-    parser.add_argument("--backend", choices=SEARCH_BACKENDS, default=DEFAULT_BACKEND, help="Search backend (default: brave)")
+    parser.add_argument("--backend", choices=SEARCH_BACKENDS, default=DEFAULT_BACKEND, help="Search backend (default: auto). auto queries all engines simultaneously for best coverage.")
     parser.add_argument("--timeout", type=positive_float, default=DEFAULT_TIMEOUT_SECONDS, help="Request timeout in seconds (default: 5)")
     args = parser.parse_args()
 
@@ -60,7 +60,7 @@ def main():
 
     if not results:
         print("No results found.", file=sys.stderr)
-        sys.exit(0)
+        sys.exit(1)
 
     for i, r in enumerate(results, 1):
         print(f"--- Result {i} ---")
