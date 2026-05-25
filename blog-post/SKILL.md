@@ -5,7 +5,7 @@ description: Create a blog post
 
 # Blog Post Writer
 
-Create a well-researched blog post on a given topic. Researches the area, writes without hyphens, and adds a validated References section with external links.
+Create a well-researched blog post on a given topic. Researches the area, writes without em dashes, and adds a validated References section with external links.
 
 ## Process
 
@@ -31,12 +31,7 @@ Gather at least 3 high quality external sources to reference.
 
 Write the blog post as a markdown file. Follow these rules strictly:
 
-- **Never use hyphens (`-`) anywhere in the text.** Use alternative phrasing instead. For example:
-  - "well known" instead of "well-known"
-  - "state of the art" instead of "state-of-the-art"
-  - "long term" instead of "long-term"
-  - Use "to" instead of hyphens in ranges: "5 to 10" not "5-10"
-- **Never use em dashes (—) or en dashes (–).** Use commas, periods, or parentheses instead.
+- **Never use em dashes (—) or en dashes (–).** Use commas, periods, or parentheses instead. Regular hyphens are fine in compound words like "counter-drone", "anti-aircraft", "long-term".
 - **Write like a human, not an AI.** Specifically:
   - Use simple, everyday words. Write "use" not "utilize", "help" not "facilitate", "start" not "embark", "show" not "showcase", "change" not "revolutionize".
   - Ban these AI slop words/phrases entirely: "delve", "tapestry", "landscape", "paradigm", "leverage", "robust", "comprehensive", "cutting-edge", "groundbreaking", "game-changing", "pivotal", "seamlessly", "furthermore", "moreover", "it's worth noting", "in today's world", "at its core", "in the realm of", "the power of".
