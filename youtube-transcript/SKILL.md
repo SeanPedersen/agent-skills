@@ -5,9 +5,7 @@ description: Fetch transcripts from YouTube videos (urls)
 
 # YouTube Transcript
 
-Fetch transcripts from YouTube videos. Python script that runs via `uv` with inline dependencies (no venv management needed).
-
-Based on https://github.com/SeanPedersen/youtube-transcript-mcp.
+Fetch transcripts from YouTube videos (for summarization).
 
 ## Setup
 
@@ -20,13 +18,13 @@ Requires [uv](https://docs.astral.sh/uv/getting-started/installation/). Dependen
 Raw timestamped transcript:
 
 ```bash
-{baseDir}/transcript.py "$URL"
+uv run {baseDir}/transcript.py "$URL"
 ```
 
-Summary-ready text (prepends an ad-removal prompt, strips timestamps):
+Summary-ready text (prepends an ad-removal prompt, strips timestamps - recommended as default for better summarization):
 
 ```bash
-{baseDir}/transcript.py "$URL" --summary
+uv run {baseDir}/transcript.py "$URL" --summary
 ```
 
 Accepts video ID or full URL:
@@ -34,28 +32,6 @@ Accepts video ID or full URL:
 - `"https://www.youtube.com/watch?v=EBw7gsDPAYQ"`
 - `"https://youtu.be/EBw7gsDPAYQ"`
 - `"https://www.youtube.com/shorts/EBw7gsDPAYQ"`
-
-## Output
-
-### Raw (default)
-
-```
-[0:00] All right. So, I got this UniFi Theta
-[0:15] I took the camera out, painted it
-[1:23] And here's the final result
-```
-
-### Summary mode
-
-```
-Remove any mention of sponsorships, ads, or promotional content from the following transcript:
-
-All right. So, I got this UniFi Theta
-I took the camera out, painted it
-...
-```
-
-Pipe `--summary` output to an LLM to produce an ad-free summary.
 
 ## Notes
 
