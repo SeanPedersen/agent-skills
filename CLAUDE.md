@@ -11,7 +11,9 @@ Claude Code needs each skill folder directly under the skills directory. Symlink
 ```bash
 mkdir -p ~/.claude/skills
 for skill in "$(pwd)"/*/; do
-  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.claude/skills/$(basename "$skill")
+  name=$(basename "$skill")
+  [[ "$name" == "browser-tools" || "$name" == "web-search" ]] && continue
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.claude/skills/$name
 done
 ```
 

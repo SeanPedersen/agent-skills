@@ -19,6 +19,8 @@ Fork of [pi-skills](https://github.com/badlogic/pi-skills) with modifications.
 
 ## Installation
 
+Some skills like browser-tools and web-search are redundant for fully featured coding agents like claude or codex - so they should be skipped for them. A minimal agent like Pi, needs them though.
+
 ### Claude Code
 
 Claude Code only looks one level deep for `SKILL.md` files, so each skill folder must be directly under the skills directory. Clone the repo somewhere, then symlink individual skills:
@@ -30,13 +32,17 @@ cd agent-skills
 # Symlink all skills (user-level)
 mkdir -p ~/.claude/skills
 for skill in "$(pwd)"/*/; do
-  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.claude/skills/$(basename "$skill")
+  name=$(basename "$skill")
+  [[ "$name" == "browser-tools" || "$name" == "web-search" ]] && continue
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.claude/skills/$name
 done
 
 # Or project-level
 mkdir -p .claude/skills
 for skill in "$(pwd)"/*/; do
-  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" .claude/skills/$(basename "$skill")
+  name=$(basename "$skill")
+  [[ "$name" == "browser-tools" || "$name" == "web-search" ]] && continue
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" .claude/skills/$name
 done
 ```
 
@@ -50,7 +56,9 @@ cd agent-skills
 
 mkdir -p ~/.codex/skills
 for skill in "$(pwd)"/*/; do
-  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.codex/skills/$(basename "$skill")
+  name=$(basename "$skill")
+  [[ "$name" == "browser-tools" || "$name" == "web-search" ]] && continue
+  [ -f "$skill/SKILL.md" ] && ln -sf "$skill" ~/.codex/skills/$name
 done
 ```
 
