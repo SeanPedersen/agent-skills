@@ -88,7 +88,7 @@ Some skills require additional setup. Generally, the agent will walk you through
 - **browser-tools**: Requires Chrome and Node.js. Run `npm install` in the skill directory.
 - **web-search**: Requires Python 3.10+ and uv. No API key needed.
 - **free-domain-search**: Requires Python 3.10+, uv, and `whois` CLI tool.
-- **youtube-transcript**: Requires Node.js. Run `npm install` in the skill directory.
+- **youtube-transcript**: Requires Python 3.10+ and uv. No API key needed.
 
 ## License
 
