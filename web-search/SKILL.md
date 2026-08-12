@@ -13,7 +13,6 @@ Web search and content extraction using DuckDuckGo. No API key required.
 uv run {baseDir}/search.py "query"                         # Basic search (5 results)
 uv run {baseDir}/search.py "query" -n 10                   # More results (max 20)
 uv run {baseDir}/search.py "query" --timelimit d           # Results from last day
-uv run {baseDir}/search.py "query" --timelimit w           # Results from last week
 uv run {baseDir}/search.py "query" --region de-de          # Results from Germany
 uv run {baseDir}/search.py "query" -n 3 --timelimit m      # Combined options
 uv run {baseDir}/search.py "query" --backend brave         # Force a single specific backend
@@ -38,4 +37,8 @@ Fetches a URL and extracts readable content as plain text.
 
 ```bash
 uv run {baseDir}/content.py "https://example.com/article"
+uv run {baseDir}/content.py "https://example.com/article" --max-chars 50000
 ```
+
+Output is limited to 20,000 characters by default to avoid context bloat. Use
+`--max-chars` to change the limit, or `--max-chars 0` for unlimited output.
