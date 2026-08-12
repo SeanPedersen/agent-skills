@@ -7,12 +7,6 @@ description: Web search
 
 Web search and content extraction using DuckDuckGo. No API key required.
 
-## Setup
-
-Requires Python 3.10+ and [uv](https://docs.astral.sh/uv/).
-
-No additional setup needed. Dependencies are managed inline via uv script headers.
-
 ## Search
 
 ```bash
@@ -40,27 +34,8 @@ uv run {baseDir}/search.py "query" --timeout 3             # Fail slow providers
 
 ## Extract Page Content
 
-```bash
-uv run {baseDir}/content.py https://example.com/article
-```
-
 Fetches a URL and extracts readable content as plain text.
 
-## Output Format
-
+```bash
+uv run {baseDir}/content.py "https://example.com/article"
 ```
---- Result 1 ---
-Title: Page Title
-Link: https://example.com/page
-Snippet: Description from search results
-
---- Result 2 ---
-...
-```
-
-## When to Use
-
-- Searching for documentation or API references
-- Looking up facts or current information
-- Fetching content from specific URLs
-- Any task requiring web search without an API key
