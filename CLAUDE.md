@@ -18,3 +18,7 @@ done
 ```
 
 For project-level install, use `.claude/skills/` instead of `~/.claude/skills/`.
+
+## Skills
+
+- `kleinanzeigen-search`: search kleinanzeigen.de (`search.py "<keywords>" --location <city> --json`) and view a single listing in full with `search.py --detail <url> --json` (full description, all image URLs, attributes, shipping flag, seller type / active since / rating / ads online).

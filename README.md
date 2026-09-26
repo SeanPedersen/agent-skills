@@ -12,6 +12,7 @@ Fork of [pi-skills](https://github.com/badlogic/pi-skills) with modifications.
 | [browser-tools](browser-tools/SKILL.md) | Interactive browser automation via Chrome DevTools Protocol |
 | [web-search](web-search/SKILL.md) | Web search and content extraction via DuckDuckGo (free, no API key) |
 | [free-domain-search](free-domain-search/SKILL.md) | Check domain name availability via HTTP + WHOIS |
+| [kleinanzeigen-search](kleinanzeigen-search/SKILL.md) | Search kleinanzeigen.de listings page by page (plain HTTP, no browser) |
 | [optimize-design](optimize-design/SKILL.md) | Tools and techniques for creating and optimizing web app UI/UX |
 | [optimize-website](optimize-website/SKILL.md) | Audit and optimize website performance targeting Core Web Vitals |
 | [security-audit](security-audit/SKILL.md) | Audit web apps for OWASP Top 10 security vulnerabilities |
@@ -88,6 +89,7 @@ Some skills require additional setup. Generally, the agent will walk you through
 - **browser-tools**: Requires Chrome and Node.js. Run `npm install` in the skill directory.
 - **web-search**: Requires Python 3.10+ and uv. No API key needed.
 - **free-domain-search**: Requires Python 3.10+, uv, and `whois` CLI tool.
+- **kleinanzeigen-search**: Requires Python 3.12+ and uv.
 - **youtube-transcript**: Requires Python 3.10+ and uv. No API key needed.
 
 ## License
