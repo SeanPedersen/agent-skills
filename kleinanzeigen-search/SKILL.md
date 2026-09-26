@@ -26,7 +26,8 @@ uv run {baseDir}/search.py --detail <listing url> --json            # one listin
 ```json
 {"ad_id", "url", "title", "price", "location", "posted", "description" /* full text */, "image_urls" /* full gallery */,
  "attributes" /* e.g. {"Zustand": "Sehr Gut"} */, "shipping" /* bool */, "seller_id", "seller_name",
- "seller_type" /* "Privater Nutzer" | commercial */, "seller_active_since", "seller_rating", "seller_ads_online", "seller_profile_url"}
+ "seller_type" /* "Privater Nutzer" | commercial */, "seller_active_since", "seller_rating", "seller_ads_online",
+ "seller_profile_url" /* private: s-bestandsliste.html?userId=…, business: /pro/<shop> */}
 ```
 
 ## Notes
@@ -36,3 +37,4 @@ uv run {baseDir}/search.py --detail <listing url> --json            # one listin
 - `posted` is raw site text ("Heute, 01:18", "14.09.2026").
 - Poll moderately to avoid rate limits.
 - Always include the listing `url` when reporting listings.
+- Flag shady listings for review (no Käuferschutz accepted by seller, suspicious pricing or incomplete  / bad reviewed seller profiles)

@@ -91,9 +91,10 @@ def _attributes(doc: HTMLParser) -> dict[str, str]:
 def parse_listing_detail(html: str, url: str) -> ListingDetail:
     """Parse an ad page (/s-anzeige/...): full text, gallery, attributes and seller profile."""
     doc = HTMLParser(html)
-    contact = doc.css_first("#viewad-contact")
-    contact_text = contact.text(strip=True, separator=" ") if contact else ""
-    profile_link = doc.css_first('#viewad-contact a[href*="userId"]')
+    # Business sellers have no profile link / ad count in the contact box; both live in the shop teaser.
+    seller_boxes = [box for box in (doc.css_first("#viewad-contact"), doc.css_first(".bizteaser--preview--more")) if box]
+    seller_text = " ".join(box.text(strip=True, separator=" ") for box in seller_boxes)
+    profile_link = doc.css_first('#viewad-contact a[href*="userId"], #viewad-bizteaser--title a')
     return ListingDetail(
         ad_id=_first_match(re.compile(r"adId:\s*'(\d+)'"), html, 1) or "",
         url=url,
@@ -108,8 +109,8 @@ def parse_listing_detail(html: str, url: str) -> ListingDetail:
         seller_id=_first_match(SELLER_ID_PATTERN, html, 1),
         seller_name=_text(doc.css_first("#viewad-contact .text-body-regular-strong")),
         seller_type=_text(doc.css_first(".userprofile-vip-details-text")),
-        seller_active_since=_first_match(ACTIVE_SINCE_PATTERN, contact_text, 1),
+        seller_active_since=_first_match(ACTIVE_SINCE_PATTERN, seller_text, 1),
         seller_rating=_text(doc.css_first(".userbadges-profile-rating")) or None,
-        seller_ads_online=_first_match(ADS_ONLINE_PATTERN, contact_text),
+        seller_ads_online=_first_match(ADS_ONLINE_PATTERN, seller_text),
         seller_profile_url=f"{BASE_URL}{profile_link.attributes['href']}" if profile_link else None,
     )
