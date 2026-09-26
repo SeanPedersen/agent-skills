@@ -1,21 +1,25 @@
 #!/usr/bin/env python3
-"""Web search via DuckDuckGo (ddgs). Run with: uv run search.py"""
+"""Web search via the Digger search API (https://digger.so). Run with: uv run search.py"""
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["ddgs"]
+# dependencies = ["primp"]
 # ///
 
 import argparse
+import os
 import sys
+from pathlib import Path
 
-from ddgs import DDGS
+import primp
 
-DEFAULT_BACKEND = "auto"
+API_URL = "https://digger.so/api/v1/search"
 DEFAULT_NUM_RESULTS = 5
-DEFAULT_REGION = "wt-wt"
-DEFAULT_TIMEOUT_SECONDS = 5
+DEFAULT_TIMEOUT_SECONDS = 10
 MAX_RESULTS = 20
-SEARCH_BACKENDS = ("auto", "brave", "google", "bing", "yahoo")
+IMPERSONATE_BROWSER = "chrome"
+IMPERSONATE_OS = "macos"
+API_KEY_ENV_VAR = "DIGGER_API_KEY"
+ENV_FILE = Path(__file__).parent / ".env"
 
 
 def positive_int(value):
@@ -32,28 +36,49 @@ def positive_float(value):
     return parsed_value
 
 
+def load_api_key():
+    """Read the key from the environment, falling back to the skill's .env file."""
+    if key := os.environ.get(API_KEY_ENV_VAR):
+        return key
+    if not ENV_FILE.is_file():
+        return None
+    for line in ENV_FILE.read_text().splitlines():
+        name, _, value = line.strip().partition("=")
+        if name == API_KEY_ENV_VAR:
+            return value.strip().strip("\"'") or None
+    return None
+
+
+def fetch_results(query, num, region, timeout):
+    params = {"q": query, "max_results": str(num)}
+    if region:
+        params["region"] = region
+    api_key = load_api_key()
+    client = primp.Client(
+        impersonate=IMPERSONATE_BROWSER,
+        impersonate_os=IMPERSONATE_OS,
+        headers={"Authorization": f"Bearer {api_key}"} if api_key else None,
+        timeout=timeout,
+    )
+    response = client.get(API_URL, params=params)
+    if response.status_code != 200:
+        raise RuntimeError(f"HTTP {response.status_code}: {response.text}")
+    return response.json().get("results", [])
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Search the web via DuckDuckGo")
+    parser = argparse.ArgumentParser(description="Search the web via Digger")
     parser.add_argument("query", nargs="+", help="Search query")
     parser.add_argument("-n", "--num", type=positive_int, default=DEFAULT_NUM_RESULTS, help="Number of results (default: 5, max: 20)")
-    parser.add_argument("--region", default=DEFAULT_REGION, help="Region code (default: wt-wt for no region)")
-    parser.add_argument("--timelimit", choices=["d", "w", "m", "y"], help="Time filter: d=day, w=week, m=month, y=year")
-    parser.add_argument("--backend", choices=SEARCH_BACKENDS, default=DEFAULT_BACKEND, help="Search backend (default: auto). auto queries all engines simultaneously for best coverage.")
-    parser.add_argument("--timeout", type=positive_float, default=DEFAULT_TIMEOUT_SECONDS, help="Request timeout in seconds (default: 5)")
+    parser.add_argument("--region", help="Region code in country-language format, e.g. us-en, de-de (default: none)")
+    parser.add_argument("--timeout", type=positive_float, default=DEFAULT_TIMEOUT_SECONDS, help="Request timeout in seconds (default: 10)")
     args = parser.parse_args()
 
     query = " ".join(args.query)
     num = min(args.num, MAX_RESULTS)
 
     try:
-        with DDGS(timeout=args.timeout) as ddgs:
-            results = list(ddgs.text(
-                query,
-                region=args.region,
-                timelimit=args.timelimit,
-                max_results=num,
-                backend=args.backend,
-            ))
+        results = fetch_results(query, num, args.region, args.timeout)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
@@ -65,8 +90,8 @@ def main():
     for i, r in enumerate(results, 1):
         print(f"--- Result {i} ---")
         print(f"Title: {r.get('title', '')}")
-        print(f"Link: {r.get('href', '')}")
-        print(f"Snippet: {r.get('body', '')}")
+        print(f"Link: {r.get('url', '')}")
+        print(f"Snippet: {r.get('snippet', '')}")
         print()
 
 
