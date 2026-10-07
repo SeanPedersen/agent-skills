@@ -3,7 +3,7 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #     "primp>=2.0.1",
-#     "selectolax>=0.4.12",
+#     "selectolax>=0.4.12,<1",
 # ]
 # ///
 """CLI: search kleinanzeigen.de page by page, or view one listing in full (--detail), as a table or JSON."""
